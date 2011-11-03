@@ -1,11 +1,12 @@
 #!/bin/bash
 
-echo "Enter UTIL:"
+hosts=$@
+echo "Enter password:"
 stty -echo
 read PASS
 stty echo
 
-for HOST in node60{0{2..9},1{0..7}}-rac; do 
+for host in hosts; do 
 	addUser="java -jar /home/radon01/ali/scratch/smc/ipmitool/SMCIPMITool.jar"
 	addUser="$addUser $(host $HOST | awk '{print $NF}') ADMIN ADMIN"
 	addUser="$addUser user add 3 root $PASS 4"
